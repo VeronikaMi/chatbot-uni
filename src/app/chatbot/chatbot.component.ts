@@ -1,5 +1,5 @@
 import { trigger, transition, style, animate } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ChatbotService } from '../chatbot.service';
 
@@ -28,6 +28,8 @@ export class ChatbotComponent implements OnInit {
   // public showChatbotChange: BehaviorSubject<boolean> =
   //   new BehaviorSubject<boolean>(false);
   public timestamp: string;
+
+  @ViewChild('messagesContainer') container: ElementRef;
 
   constructor(private chatService: ChatbotService) {}
 
@@ -60,6 +62,21 @@ export class ChatbotComponent implements OnInit {
       //     this.messages.push(messageReturn);
       //   });
       // }
+      setTimeout(() => this.getResponse(newMessage.text), 1000);
+      // this.bottom.nativeElement.scrollIntoView(false);
+      // if (
+      //   this.container.nativeElement.scrollTop +
+      //     this.container.nativeElement.clientHeight ===
+      //   this.container.nativeElement.scrollHeight
+      // ) {
+      this.container.nativeElement.scrollTop =
+        this.container.nativeElement.scrollHeight;
+      console.log(
+        this.container,
+        this.container.nativeElement.scrollTop,
+        this.container.nativeElement.scrollHeight
+      );
+      // }
       this.textInput = '';
     }
   }
@@ -68,6 +85,16 @@ export class ChatbotComponent implements OnInit {
     this.showChatbot = !this.showChatbot;
     if (!this.timestamp) {
       this.timestamp = this.getTime();
+    }
+  }
+
+  private getResponse(text: string) {
+    if (text.includes('hello') || text.includes('hi')) {
+      this.messages.push({
+        text: 'Hello there!',
+        date: this.getTime(),
+        userOwner: false,
+      });
     }
   }
 

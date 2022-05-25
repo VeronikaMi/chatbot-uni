@@ -12,7 +12,7 @@
     </svg>
   </div>
   <div class="chatbot-body">
-    <div class="list-messages">
+    <div class="list-messages" #messagesContainer>
       <p class="timestamp">{{ timestamp }}</p>
       <div *ngFor="let message of messages">
         <message
