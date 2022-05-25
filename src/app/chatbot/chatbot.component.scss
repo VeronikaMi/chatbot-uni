@@ -7,7 +7,6 @@
   height: 560px;
   border-radius: 20px 20px 0 0;
   background-color: $bg-primary;
-  // background-color: aqua;
 
   &-header {
     display: flex;
@@ -34,7 +33,6 @@
     border: 1px solid $blue-primary;
     background-color: $bg-primary;
     height: 100%;
-    // position: relative;
 
     .messages {
       .timestamp {
@@ -51,49 +49,66 @@
       bottom: 6px;
       width: 100%;
 
-      form {
-        display: flex;
-        input {
-          background-color: $gray-secondary;
-          padding: 10px;
-          font-size: 18px;
-          border: none;
-          border-radius: 20px;
-          width: 85%;
-          margin-right: 10px;
-          color: $timestamp-gray;
-        }
+      input {
+        background-color: $gray-secondary;
+        padding: 10px;
+        font-size: 18px;
+        border: none;
+        border-radius: 20px;
+        width: 85%;
+        margin-right: 10px;
+        color: $timestamp-gray;
+        height: 40px;
+      }
 
-        button {
-          cursor: pointer;
-          background-color: $blue-primary;
-          border: none;
-          border-radius: 100%;
-          width: 40px;
-          height: 40px;
-        }
+      button {
+        cursor: pointer;
+        background-color: $blue-primary;
+        border: none;
+        border-radius: 100%;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        bottom: 10px;
       }
     }
   }
 }
 
-// .list-messages {
-//   display: flex;
-//   flex-direction: column;
-//   height: 88%;
-//   overflow: auto;
-// }
+.list-messages {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  overflow: auto;
+  font-size: 18px;
+  padding: 10px 0;
+}
+.message {
+  max-width: 70%;
+  margin-top: 20px;
+}
 
-// .left-message {
-//   display: flex;
-//   margin-left: 10px;
-// }
+.left-message {
+  display: flex;
+  background-color: $gray-primary;
+  border-radius: 10px 0 10px 0;
+  padding: 10px;
+  color: $chatbot-text;
+  width: fit-content;
+  margin-left: 60px;
+}
 
-// .right-message {
-//   display: flex;
-//   justify-content: flex-end;
-//   margin-right: 10px;
-// }
+.right-message {
+  display: flex;
+  float: right;
+  background-color: $blue-primary;
+  border-radius: 0 10px 0 10px;
+  padding: 10px;
+  color: $user-text;
+  width: fit-content;
+  margin-right: 40px;
+  text-align: center;
+}
 
 // .input-message {
 //   border-top: 2px solid grey;

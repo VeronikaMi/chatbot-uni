@@ -4,12 +4,18 @@ import { ChatbotService } from '../chatbot.service';
 @Component({
   selector: 'chat',
   templateUrl: './chatbot.component.html',
-  styleUrls: ['./chatbot.component.css'],
+  styleUrls: ['./chatbot.component.scss'],
 })
 export class ChatbotComponent {
   BACK_ENABLED: boolean = true;
 
-  @Input('messages') messages: any[];
+  @Input('messages') messages: any[] = [
+    {
+      text: 'Lark has a friendly, kind and humorous persona that appeals to seniors, its largest clientele. Users can engage with the chatbot through chat, voice and button options.',
+      date: new Date().getDate(),
+      userOwner: false,
+    },
+  ];
   @Input('colorBackRight') colorBackRight: string;
   @Input('colorFontRight') colorFontRight: string;
   @Input('colorBackLeft') colorBackLeft: string;
@@ -20,10 +26,10 @@ export class ChatbotComponent {
   constructor(private chatService: ChatbotService) {}
 
   ngOnInit() {
-    // this.colorBackRight ? this.colorBackRight : '#007bff';
-    // this.colorFontRight ? this.colorFontRight : '#ffffff';
-    // this.colorBackLeft ? this.colorBackLeft : '#f8f9fa';
-    // this.colorFontLeft ? this.colorFontLeft : '#343a40';
+    this.colorBackRight ? this.colorBackRight : '#007bff';
+    this.colorFontRight ? this.colorFontRight : '#ffffff';
+    this.colorBackLeft ? this.colorBackLeft : '#f8f9fa';
+    this.colorFontLeft ? this.colorFontLeft : '#343a40';
   }
 
   sendMessage() {

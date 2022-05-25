@@ -3,8 +3,12 @@
     {{ text }}
   </p>
 </div>
-<div *ngIf="!owner" class="content-message left-content">
-  <p [ngStyle]="{ 'background-color': colorBackLeft, color: colorFontLeft }">
+<div *ngIf="!owner" class="chatbot">
+  <img src="../../../assets/Chatbot.png" alt="chatbot" />
+  <p
+    class="content-message left-content"
+    [ngStyle]="{ 'background-color': colorBackLeft, color: colorFontLeft }"
+  >
     {{ text }}
   </p>
 </div>

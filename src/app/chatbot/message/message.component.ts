@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'message',
   templateUrl: './message.component.html',
-  styleUrls: ['./message.component.css'],
+  styleUrls: ['./message.component.scss'],
 })
 export class MessageComponent {
   @Input('text') text: string;

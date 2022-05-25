@@ -28,17 +28,16 @@
     </div>
     <div class="actions">
       <div class="input-message">
-        <textarea
+        <input
           class="input-text-message"
+          type="text"
           [(ngModel)]="textInput"
           placeholder="Type text here"
           (keyup)="onKey($event)"
-        ></textarea>
-        <i
-          class="fa fa-paper-plane fa-2x input-send"
-          aria-hidden="true"
-          (click)="sendMessage()"
-        ></i>
+        />
+        <button type="submit" (click)="sendMessage()">
+          <img src="../../assets/send 1.png" alt="airplane" />
+        </button>
       </div>
     </div>
   </div>
