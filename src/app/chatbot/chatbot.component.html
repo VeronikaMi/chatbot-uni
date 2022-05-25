@@ -1,0 +1,45 @@
+<div class="chatbot">
+  <div class="chatbot-header">
+    <h3>Chatbot</h3>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+      <path
+        d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"
+      />
+    </svg>
+  </div>
+  <div class="chatbot-body">
+    <div class="list-messages">
+      <div *ngFor="let message of messages" class="message-container">
+        <message
+          class="message"
+          [text]="message.text"
+          [date]="message.date"
+          [colorBackRight]="colorBackRight"
+          [colorFontRight]="colorFontRight"
+          [colorBackLeft]="colorBackLeft"
+          [colorFontLeft]="colorFontLeft"
+          [owner]="message.userOwner"
+          [ngClass]="{
+            'left-message': !message.userOwner,
+            'right-message': message.userOwner
+          }"
+        ></message>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="input-message">
+        <textarea
+          class="input-text-message"
+          [(ngModel)]="textInput"
+          placeholder="Type text here"
+          (keyup)="onKey($event)"
+        ></textarea>
+        <i
+          class="fa fa-paper-plane fa-2x input-send"
+          aria-hidden="true"
+          (click)="sendMessage()"
+        ></i>
+      </div>
+    </div>
+  </div>
+</div>
