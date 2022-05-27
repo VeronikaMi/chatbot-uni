@@ -1,5 +1,13 @@
 import { trigger, transition, style, animate } from '@angular/animations';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  SimpleChange,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ChatbotService } from '../chatbot.service';
 
@@ -16,6 +24,11 @@ export class ChatbotComponent implements OnInit {
       text: 'Lark has a friendly, kind and humorous persona that appeals to seniors, its largest clientele. Users can engage with the chatbot through chat, voice and button options.',
       date: this.getTime(),
       userOwner: false,
+      selectOptions: [
+        { id: 1, text: 'frequently asked question 1' },
+        { id: 2, text: 'frequently asked question 2' },
+        { id: 3, text: 'frequently asked question 3' },
+      ],
     },
   ];
   @Input('colorBackRight') colorBackRight: string;
@@ -25,6 +38,7 @@ export class ChatbotComponent implements OnInit {
 
   textInput: string = '';
   public showChatbot: boolean = false;
+  public showMenu: boolean = false;
   // public showChatbotChange: BehaviorSubject<boolean> =
   //   new BehaviorSubject<boolean>(false);
   public timestamp: string;
@@ -34,23 +48,40 @@ export class ChatbotComponent implements OnInit {
   constructor(private chatService: ChatbotService) {}
 
   ngOnInit() {
-    this.colorBackRight ? this.colorBackRight : '#007bff';
-    this.colorFontRight ? this.colorFontRight : '#ffffff';
-    this.colorBackLeft ? this.colorBackLeft : '#f8f9fa';
-    this.colorFontLeft ? this.colorFontLeft : '#343a40';
+    if (localStorage.getItem('history')) {
+      this.messages = [...JSON.parse(localStorage.getItem('history'))];
+    }
+  }
 
-    // this.showChatbotChange.subscribe((state) => {
-    //   this.showChatbot = state;
-    //   if (this.showChatbot) {
-    //     this.timestamp = this.getTime();
-    //   }
-    // });
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.messages) {
+      console.log(changes);
+    }
+  }
+
+  onThreeDotsClick() {
+    console.log('dots clicked');
+  }
+
+  onOptionSelect(id: number) {
+    this.messages.push({
+      text: this.messages[0].selectOptions.find((el) => el.id === id).text,
+      date: this.getTime(),
+      userOwner: true,
+    });
+    localStorage.setItem('history', JSON.stringify(this.messages));
+    this.container.nativeElement.scrollTop =
+      this.container.nativeElement.scrollHeight;
   }
 
   sendMessage() {
     if (this.textInput.length > 0) {
       let newMessage = { text: this.textInput, date: '', userOwner: true };
+      newMessage.date = this.getTime();
       this.messages.push(newMessage);
+      this.container.nativeElement.scrollTop =
+        this.container.nativeElement.scrollHeight;
+      localStorage.setItem('history', JSON.stringify(this.messages));
       let messageBack = { firstname: 'Simon', text: this.textInput };
       // if (this.BACK_ENABLED) {
       //   this.chatService.sendMessage(messageBack).then((res) => {
@@ -69,23 +100,52 @@ export class ChatbotComponent implements OnInit {
       //     this.container.nativeElement.clientHeight ===
       //   this.container.nativeElement.scrollHeight
       // ) {
-      this.container.nativeElement.scrollTop =
-        this.container.nativeElement.scrollHeight;
-      console.log(
-        this.container,
-        this.container.nativeElement.scrollTop,
-        this.container.nativeElement.scrollHeight
-      );
+
       // }
       this.textInput = '';
     }
   }
 
-  public showChat() {
-    this.showChatbot = !this.showChatbot;
-    if (!this.timestamp) {
-      this.timestamp = this.getTime();
+  public onChatbotClick(element: any) {
+    if (
+      (element.classList.contains('collapse') &&
+        !element.classList.contains('menu-item')) ||
+      !this.showChatbot
+    ) {
+      this.showChatbot = !this.showChatbot;
+      this.container.nativeElement.scrollTop =
+        this.container.nativeElement.scrollHeight;
+      console.log(this.container.nativeElement.scrollTop);
+      if (!this.timestamp) {
+        this.timestamp = this.getTime(true);
+      }
+    } else {
+      this.showMenu = !this.showMenu;
     }
+  }
+
+  onDeleteHistory() {
+    this.messages = [
+      {
+        text: 'Lark has a friendly, kind and humorous persona that appeals to seniors, its largest clientele. Users can engage with the chatbot through chat, voice and button options.',
+        date: this.getTime(),
+        userOwner: false,
+        selectOptions: [
+          { id: 1, text: 'frequently asked question 1' },
+          { id: 2, text: 'frequently asked question 2' },
+          { id: 3, text: 'frequently asked question 3' },
+        ],
+      },
+    ];
+    // this.showMenu = false;
+    localStorage.clear();
+  }
+
+  // needs to be fixed
+  onCloseChat() {
+    // this.showMenu = false;
+    this.showChatbot = false;
+    console.log('close Chat', this.showMenu, this.showChatbot);
   }
 
   private getResponse(text: string) {
@@ -96,6 +156,8 @@ export class ChatbotComponent implements OnInit {
         userOwner: false,
       });
     }
+
+    localStorage.setItem('history', JSON.stringify(this.messages));
   }
 
   onKey(event: any) {
@@ -104,11 +166,19 @@ export class ChatbotComponent implements OnInit {
     }
   }
 
-  private getTime(): string {
+  private getTime(isMainTimestamp?: boolean): string {
     const date = new Date();
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
+    let timestamp = `${hours} : ${minutes}`;
 
-    return `${hours} : ${minutes}`;
+    if (isMainTimestamp) {
+      timestamp =
+        `${date.getDate()} ${date.toLocaleString('default', {
+          month: 'short',
+        })}, ` + timestamp;
+    }
+
+    return timestamp;
   }
 }

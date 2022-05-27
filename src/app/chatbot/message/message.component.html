@@ -1,14 +1,23 @@
-<div *ngIf="owner" class="content-message right-content">
-  <p [ngStyle]="{ 'background-color': colorBackRight, color: colorFontRight }">
-    {{ text }}
+<div *ngIf="message.userOwner" class="content-message right-content">
+  <p>
+    {{ message.text }}
   </p>
+  <p class="timestamp">{{ message.date }}</p>
 </div>
-<div *ngIf="!owner" class="chatbot">
-  <img src="../../../assets/Chatbot.png" alt="chatbot" />
-  <p
-    class="content-message left-content"
-    [ngStyle]="{ 'background-color': colorBackLeft, color: colorFontLeft }"
-  >
-    {{ text }}
-  </p>
+<div *ngIf="!message.userOwner">
+  <div class="left-content">
+    <img src="../../../assets/Chatbot.png" alt="chatbot" />
+    <p class="content-message">
+      {{ message.text }}
+    </p>
+    <p class="timestamp">{{ message.date }}</p>
+  </div>
+  <div class="selections" *ngIf="message.selectOptions">
+    <p
+      *ngFor="let option of message.selectOptions"
+      (click)="onSelectOption(option.id)"
+    >
+      {{ option.text }}
+    </p>
+  </div>
 </div>

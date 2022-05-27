@@ -1,10 +1,68 @@
-.chatbot {
+@import "../../../styles.scss";
+
+.content-message {
+  font-size: 18px;
+  width: 100%;
+}
+
+p.timestamp {
+  color: $timestamp-gray;
+  position: absolute;
+  font-size: 16px;
+}
+
+.left-content {
   position: relative;
+  background-color: $gray-primary;
+  border-radius: 10px 0 10px 0;
+  padding: 10px;
+  color: $chatbot-text;
+
   img {
     width: 40px;
     height: 40px;
     position: absolute;
-    left: -60px;
-    bottom: -30px;
+    left: -50px;
+    bottom: -20px;
+  }
+
+  p.timestamp {
+    right: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.right-content {
+  background-color: $blue-primary;
+  border-radius: 0 10px 0 10px;
+  padding: 10px;
+  color: $user-text;
+
+  p.timestamp {
+    left: -55px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.selections {
+  font-size: 18px;
+  color: $chatbot-text;
+  display: flex;
+  margin-top: 10px;
+  flex-wrap: wrap;
+
+  p {
+    background-color: $gray-primary;
+    border-radius: 10px;
+    width: fit-content;
+    margin: 5px;
+    padding: 10px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $gray-secondary;
+    }
   }
 }

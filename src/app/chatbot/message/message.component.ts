@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'message',
@@ -6,11 +6,12 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./message.component.scss'],
 })
 export class MessageComponent {
-  @Input('text') text: string;
-  @Input('date') date: any;
-  @Input('owner') owner: boolean;
-  @Input('colorBackRight') colorBackRight: string;
-  @Input('colorFontRight') colorFontRight: string;
-  @Input('colorBackLeft') colorBackLeft: string;
-  @Input('colorFontLeft') colorFontLeft: string;
+  @Input() message: any;
+  @Input('date') timestamp: string;
+
+  @Output() selectedOption: EventEmitter<number> = new EventEmitter<number>();
+
+  onSelectOption(id: number) {
+    this.selectedOption.emit(id);
+  }
 }

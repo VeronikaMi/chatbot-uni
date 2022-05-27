@@ -11,6 +11,7 @@
   transition: transform 0.2s ease-in;
 
   &-header {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -31,6 +32,30 @@
       cursor: pointer;
       transition: transform 0.2s ease-in;
     }
+
+    .menu {
+      position: absolute;
+      background-color: #a3dbff;
+      color: $chatbot-text;
+      bottom: -70px;
+      right: 18px;
+      border-radius: 5px;
+      z-index: 10;
+      overflow: hidden;
+
+      ul {
+        list-style: none;
+
+        li {
+          padding: 10px;
+          font-size: 18px;
+          &:hover {
+            cursor: pointer;
+            background-color: #d9f0ff;
+          }
+        }
+      }
+    }
   }
 
   &-body {
@@ -42,8 +67,11 @@
     .timestamp {
       color: $timestamp-gray;
       font-size: 16px;
-      text-align: center;
-      padding-top: 10px;
+      padding: 6px;
+      background: #f1f1f1;
+      width: fit-content;
+      margin: 0 auto;
+      border-radius: 20px;
     }
 
     .list-messages {
@@ -51,7 +79,6 @@
       flex-direction: column;
       height: 75%;
       overflow: auto;
-      font-size: 18px;
       padding: 10px 0;
 
       .bottom {
@@ -106,24 +133,14 @@
 
 .left-message {
   display: flex;
-  background-color: $gray-primary;
-  border-radius: 10px 0 10px 0;
-  padding: 10px;
-  color: $chatbot-text;
-  width: fit-content;
   margin-left: 60px;
 }
 
 .right-message {
   display: flex;
   float: right;
-  background-color: $blue-primary;
-  border-radius: 0 10px 0 10px;
-  padding: 10px;
-  color: $user-text;
   width: fit-content;
-  margin-right: 40px;
-  text-align: center;
+  margin-right: 30px;
 }
 
 .hide {
@@ -133,23 +150,6 @@
 .show {
   transform: translateY(0);
 }
-
-// .input-message {
-//   border-top: 2px solid grey;
-//   height: 12%;
-// }
-
-// .input-text-message {
-//   height: 100%;
-//   width: 80%;
-// }
-
-// .input-send {
-//   color: #007bff;
-//   position: relative;
-//   left: 7px;
-//   top: -22px;
-// }
 
 @keyframes floatUp {
   from {
