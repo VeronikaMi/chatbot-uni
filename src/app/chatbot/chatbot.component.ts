@@ -1,14 +1,12 @@
-import { trigger, transition, style, animate } from '@angular/animations';
 import {
+  AfterViewChecked,
   Component,
   ElementRef,
   Input,
   OnInit,
-  SimpleChange,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
 import { ChatbotService } from '../chatbot.service';
 
 @Component({
@@ -16,7 +14,7 @@ import { ChatbotService } from '../chatbot.service';
   templateUrl: './chatbot.component.html',
   styleUrls: ['./chatbot.component.scss'],
 })
-export class ChatbotComponent implements OnInit {
+export class ChatbotComponent implements OnInit, AfterViewChecked {
   BACK_ENABLED: boolean = true;
 
   @Input('messages') messages: any[] = [
@@ -31,16 +29,10 @@ export class ChatbotComponent implements OnInit {
       ],
     },
   ];
-  @Input('colorBackRight') colorBackRight: string;
-  @Input('colorFontRight') colorFontRight: string;
-  @Input('colorBackLeft') colorBackLeft: string;
-  @Input('colorFontLeft') colorFontLeft: string;
 
   textInput: string = '';
   public showChatbot: boolean = false;
   public showMenu: boolean = false;
-  // public showChatbotChange: BehaviorSubject<boolean> =
-  //   new BehaviorSubject<boolean>(false);
   public timestamp: string;
 
   @ViewChild('messagesContainer') container: ElementRef;
@@ -59,8 +51,8 @@ export class ChatbotComponent implements OnInit {
     }
   }
 
-  onThreeDotsClick() {
-    console.log('dots clicked');
+  ngAfterViewChecked(): void {
+    this.scrollBottom();
   }
 
   onOptionSelect(id: number) {
@@ -70,8 +62,6 @@ export class ChatbotComponent implements OnInit {
       userOwner: true,
     });
     localStorage.setItem('history', JSON.stringify(this.messages));
-    this.container.nativeElement.scrollTop =
-      this.container.nativeElement.scrollHeight;
   }
 
   sendMessage() {
@@ -79,8 +69,6 @@ export class ChatbotComponent implements OnInit {
       let newMessage = { text: this.textInput, date: '', userOwner: true };
       newMessage.date = this.getTime();
       this.messages.push(newMessage);
-      this.container.nativeElement.scrollTop =
-        this.container.nativeElement.scrollHeight;
       localStorage.setItem('history', JSON.stringify(this.messages));
       let messageBack = { firstname: 'Simon', text: this.textInput };
       // if (this.BACK_ENABLED) {
@@ -94,14 +82,6 @@ export class ChatbotComponent implements OnInit {
       //   });
       // }
       setTimeout(() => this.getResponse(newMessage.text), 1000);
-      // this.bottom.nativeElement.scrollIntoView(false);
-      // if (
-      //   this.container.nativeElement.scrollTop +
-      //     this.container.nativeElement.clientHeight ===
-      //   this.container.nativeElement.scrollHeight
-      // ) {
-
-      // }
       this.textInput = '';
     }
   }
@@ -113,9 +93,9 @@ export class ChatbotComponent implements OnInit {
       !this.showChatbot
     ) {
       this.showChatbot = !this.showChatbot;
-      this.container.nativeElement.scrollTop =
-        this.container.nativeElement.scrollHeight;
-      console.log(this.container.nativeElement.scrollTop);
+      if (this.showMenu) {
+        this.showMenu = false;
+      }
       if (!this.timestamp) {
         this.timestamp = this.getTime(true);
       }
@@ -137,15 +117,7 @@ export class ChatbotComponent implements OnInit {
         ],
       },
     ];
-    // this.showMenu = false;
     localStorage.clear();
-  }
-
-  // needs to be fixed
-  onCloseChat() {
-    // this.showMenu = false;
-    this.showChatbot = false;
-    console.log('close Chat', this.showMenu, this.showChatbot);
   }
 
   private getResponse(text: string) {
@@ -180,5 +152,10 @@ export class ChatbotComponent implements OnInit {
     }
 
     return timestamp;
+  }
+
+  private scrollBottom(): void {
+    this.container.nativeElement.scrollTop =
+      this.container.nativeElement.scrollHeight;
   }
 }
