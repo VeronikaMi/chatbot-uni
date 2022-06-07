@@ -14,7 +14,7 @@ p.timestamp {
 .left-content {
   position: relative;
   background-color: $gray-primary;
-  border-radius: 10px 0 10px 0;
+  border-radius: 10px 10px 10px 0;
   padding: 10px;
   color: $chatbot-text;
 
@@ -36,7 +36,7 @@ p.timestamp {
 .right-content {
   position: relative;
   background-color: $blue-primary;
-  border-radius: 0 10px 0 10px;
+  border-radius: 10px 10px 0 10px;
   padding: 10px;
   color: $user-text;
 
