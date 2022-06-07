@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import {
   AfterViewChecked,
   Component,
@@ -16,19 +17,18 @@ import { ChatbotService } from '../chatbot.service';
 })
 export class ChatbotComponent implements OnInit, AfterViewChecked {
   BACK_ENABLED: boolean = true;
+  private initialMessage = {
+    text: 'გამარჯობა, მე ბანკის ციფრული ასისტენტი ვარ. ბანკის ოპერატორის მსგავსად, პასუხის გაცემა მეც მყისიერად შემიძლია. მთავარია, რაც გაინტერესებთ, მოკლედ აღწეროთ და ისე მომწეროთ',
+    date: this.getTime(),
+    userOwner: false,
+    selectOptions: [
+      { id: 1, text: 'როგორ გადავრიცხო თანხა?' },
+      { id: 2, text: 'როგორ დავბლოკო ბარათი?' },
+      { id: 3, text: 'როგორ ავიღო სესხი?' },
+    ],
+  };
 
-  @Input('messages') messages: any[] = [
-    {
-      text: 'Lark has a friendly, kind and humorous persona that appeals to seniors, its largest clientele. Users can engage with the chatbot through chat, voice and button options.',
-      date: this.getTime(),
-      userOwner: false,
-      selectOptions: [
-        { id: 1, text: 'frequently asked question 1' },
-        { id: 2, text: 'frequently asked question 2' },
-        { id: 3, text: 'frequently asked question 3' },
-      ],
-    },
-  ];
+  @Input('messages') messages: any[] = [this.initialMessage];
 
   textInput: string = '';
   public showChatbot: boolean = false;
@@ -37,7 +37,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
 
   @ViewChild('messagesContainer') container: ElementRef;
 
-  constructor(private chatService: ChatbotService) {}
+  constructor(private chatService: ChatbotService, private http: HttpClient) {}
 
   ngOnInit() {
     if (localStorage.getItem('history')) {
@@ -61,6 +61,15 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
       date: this.getTime(),
       userOwner: true,
     });
+
+    setTimeout(
+      () =>
+        this.getResponse(
+          this.messages[0].selectOptions.find((el) => el.id === id).text
+        ),
+      1000
+    );
+
     localStorage.setItem('history', JSON.stringify(this.messages));
   }
 
@@ -70,17 +79,6 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
       newMessage.date = this.getTime();
       this.messages.push(newMessage);
       localStorage.setItem('history', JSON.stringify(this.messages));
-      let messageBack = { firstname: 'Simon', text: this.textInput };
-      // if (this.BACK_ENABLED) {
-      //   this.chatService.sendMessage(messageBack).then((res) => {
-      //     let messageReturn = {
-      //       text: res.json().speech_answer,
-      //       date: '',
-      //       userOwner: false,
-      //     };
-      //     this.messages.push(messageReturn);
-      //   });
-      // }
       setTimeout(() => this.getResponse(newMessage.text), 1000);
       this.textInput = '';
     }
@@ -105,31 +103,24 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
   }
 
   onDeleteHistory() {
-    this.messages = [
-      {
-        text: 'Lark has a friendly, kind and humorous persona that appeals to seniors, its largest clientele. Users can engage with the chatbot through chat, voice and button options.',
-        date: this.getTime(),
-        userOwner: false,
-        selectOptions: [
-          { id: 1, text: 'frequently asked question 1' },
-          { id: 2, text: 'frequently asked question 2' },
-          { id: 3, text: 'frequently asked question 3' },
-        ],
-      },
-    ];
+    this.messages = [this.initialMessage];
     localStorage.clear();
   }
 
   private getResponse(text: string) {
-    if (text.includes('hello') || text.includes('hi')) {
-      this.messages.push({
-        text: 'Hello there!',
-        date: this.getTime(),
-        userOwner: false,
-      });
-    }
+    const formData = new FormData();
+    formData.append('question', text);
 
-    localStorage.setItem('history', JSON.stringify(this.messages));
+    this.http
+      .post('https://rulebased-chatbot.herokuapp.com', formData)
+      .subscribe((response: any) => {
+        this.messages.push({
+          text: response.answer,
+          date: this.getTime(),
+          userOwner: false,
+        });
+        localStorage.setItem('history', JSON.stringify(this.messages));
+      });
   }
 
   onKey(event: any) {
