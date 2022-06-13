@@ -1,0 +1,8 @@
+<div [class]="isVertical ? '' : 'horizontal'">
+  <trigger
+    *ngFor="let item of triggers"
+    [isVertical]="isVertical"
+    [trigger]="item"
+    [isReview]="isReview"
+  ></trigger>
+</div>

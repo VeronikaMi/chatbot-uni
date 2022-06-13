@@ -1,0 +1,7 @@
+<div [class]="isVertical ? 'trigger vertical' : 'trigger horizontal'">
+  <img [src]="trigger.imgUrl" alt="trigger" />
+  <div class="text">
+    <h4 [ngClass]="{ highlight: isReview }">{{ trigger.heading }}</h4>
+    <p>{{ trigger.text }}</p>
+  </div>
+</div>

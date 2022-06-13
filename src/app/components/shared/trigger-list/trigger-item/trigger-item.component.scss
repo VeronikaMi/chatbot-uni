@@ -1,0 +1,47 @@
+@import "../../../../../styles.scss";
+
+.trigger {
+  color: $primary-dark;
+  h4 {
+    font-size: 20px;
+    margin: 10px 0;
+  }
+
+  .highlight {
+    color: $highlight-primary;
+  }
+
+  p {
+    font-size: 16px;
+  }
+}
+
+.trigger.horizontal {
+  text-align: center;
+}
+
+.trigger.vertical {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 50px;
+
+  img {
+    margin: 40px;
+  }
+
+  .text {
+    h4 {
+      margin-bottom: 10px;
+    }
+  }
+
+  &:before {
+    content: "";
+    height: 140px;
+    width: 140px;
+    background-color: $primary-dark;
+    position: absolute;
+    z-index: -9;
+  }
+}

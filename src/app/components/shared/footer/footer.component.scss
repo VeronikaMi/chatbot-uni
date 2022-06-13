@@ -1,0 +1,38 @@
+@import "../../../../styles.scss";
+
+footer {
+  padding: 60px;
+  text-align: center;
+  background-color: $primary-dark;
+  color: $primary-light;
+
+  & > *:not(:last-child) {
+    margin-bottom: 40px;
+  }
+
+  .contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+
+    li {
+      cursor: pointer;
+      width: 70px;
+      aspect-ratio: 1/1;
+      background-color: $highlight-primary;
+      transition: all 0.2s ease-in;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        background-color: lighten($color: $highlight-primary, $amount: 3);
+      }
+    }
+  }
+
+  .copyright {
+    color: rgba($primary-light, 0.8);
+  }
+}

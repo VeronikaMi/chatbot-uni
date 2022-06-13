@@ -1,0 +1,24 @@
+<div class="page-container">
+  <div class="form-section">
+    <div class="left">
+      <div class="white-box">
+        <h3 class="highlight">დაგვიკავშირდი</h3>
+        <h1>გაქვს რაიმე ზოგადი კითხვა? გამოგვიგზავნე იმეილი</h1>
+      </div>
+    </div>
+    <div class="right">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <input ngModel type="text" name="name" placeholder="სახელი" />
+        <input ngModel type="text" name="surname" placeholder="გვარი" />
+        <textarea ngModel name="message" placeholder="წერილი"></textarea>
+        <button type="submit">გაგზავნა</button>
+      </form>
+    </div>
+  </div>
+  <div class="trigger-section">
+    <trigger-list
+      [isVertical]="false"
+      [triggers]="contactTriggers"
+    ></trigger-list>
+  </div>
+</div>

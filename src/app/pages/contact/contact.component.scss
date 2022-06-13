@@ -1,0 +1,95 @@
+@import "../../../styles.scss";
+
+.page-container {
+  width: 80%;
+  margin: 0 auto;
+
+  & > * {
+    margin-bottom: 140px;
+  }
+
+  .form-section {
+    background-color: $primary-dark;
+    padding-bottom: 40px;
+    display: flex;
+    & > * {
+      width: 50%;
+    }
+
+    .white-box {
+      background-color: $primary-light;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      height: 80%;
+      width: 85%;
+      margin-left: auto;
+      padding: 55px;
+
+      .highlight {
+        color: $highlight-primary;
+        font-size: 32px;
+        font-weight: normal;
+      }
+
+      h1 {
+        color: $primary-dark;
+        font-size: 36px;
+      }
+    }
+
+    .right {
+      padding: 60px;
+
+      form {
+        & > * {
+          display: block;
+          width: 85%;
+          border: 1px solid $highlight-primary;
+          margin-bottom: 30px;
+          color: $highlight-primary;
+          font-size: 16px;
+          padding: 20px 15px;
+          background: transparent;
+
+          &::placeholder {
+            color: $highlight-primary;
+          }
+        }
+
+        textarea {
+          height: 150px;
+          resize: none;
+        }
+
+        button {
+          background: $highlight-primary;
+          color: $primary-dark;
+          font-weight: bold;
+          font-size: 18px;
+          transition: all 0.2s ease-in;
+
+          &:hover {
+            cursor: pointer;
+            background-color: lighten($color: $highlight-primary, $amount: 3);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 960px) {
+  .page-container {
+    width: 90%;
+    .form-section {
+      flex-direction: column;
+      justify-content: center;
+
+      & > * {
+        width: 100%;
+      }
+    }
+  }
+}

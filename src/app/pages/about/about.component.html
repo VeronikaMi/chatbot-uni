@@ -1,0 +1,32 @@
+<div class="about-container">
+  <div class="hero-section">
+    <div class="gray-section">
+      <h2>1998 წლიდან ამ ბანკს ენდობიან ათასები</h2>
+      <p>
+        Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit
+        amet, consectetur adipiscing elit. Mauris blandit aliquet elit, eget
+        tincidunt nibh pulvinar a. Vestibulum ante ipsum primis in faucibus orci
+        luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit
+        amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit
+        amet nisl tempus convallis quis ac lectus. Donec sollicitudin molestie
+        malesuada.
+      </p>
+    </div>
+  </div>
+  <div class="triggers">
+    <trigger-list
+      [isVertical]="false"
+      [triggers]="aboutTriggers"
+    ></trigger-list>
+  </div>
+  <div class="review">
+    <h3>რას ამბობენ ჩვენი კლიენტები</h3>
+    <div class="reviews">
+      <trigger-list
+        [isReview]="true"
+        [isVertical]="false"
+        [triggers]="reviews"
+      ></trigger-list>
+    </div>
+  </div>
+</div>

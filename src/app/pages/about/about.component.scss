@@ -1,0 +1,57 @@
+@import "../../../styles.scss";
+
+.about-container {
+  width: 80%;
+  margin: 0 auto;
+
+  & > * {
+    margin-bottom: 140px;
+  }
+
+  .hero-section {
+    height: 700px;
+    background: url("../../../assets/Bank.png") no-repeat center;
+    position: relative;
+    .gray-section {
+      position: absolute;
+      bottom: 0;
+      background-color: $primary-dark;
+      color: $primary-light;
+      padding: 70px 50px;
+      width: 80%;
+      margin-bottom: auto;
+
+      h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 35px;
+      }
+    }
+  }
+
+  .review {
+    h3 {
+      font-size: 32px;
+      color: $primary-dark;
+      margin-bottom: 50px;
+    }
+  }
+}
+
+@media (max-width: 960px) {
+  .page-container {
+    width: 90%;
+    .form-section {
+      flex-direction: column;
+      justify-content: center;
+
+      & > * {
+        width: 100%;
+      }
+    }
+  }
+}

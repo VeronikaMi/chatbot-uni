@@ -1,0 +1,15 @@
+@import "../../../../styles.scss";
+
+header {
+  padding: 25px;
+  text-align: center;
+  color: $primary-dark;
+
+  #logo {
+    font-weight: bold;
+    font-size: 20px;
+    .highlight {
+      color: $highlight-primary;
+    }
+  }
+}

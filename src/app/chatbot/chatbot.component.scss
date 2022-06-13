@@ -5,18 +5,16 @@
   right: 30px;
   width: 440px;
   height: 560px;
-  border-radius: 20px 20px 0 0;
-  background-color: $bg-primary;
+  background-color: $primary-light;
   transform: translateY(90%);
   transition: transform 0.2s ease-in;
 
   .menu {
     position: absolute;
-    background-color: $blue-primary;
+    background-color: $primary-dark;
     color: #fff;
     top: -70px;
     right: 18px;
-    border-radius: 5px;
     z-index: 10;
     overflow: hidden;
     border: 1px solid #fff;
@@ -30,7 +28,7 @@
         border-collapse: collapse;
         &:hover {
           cursor: pointer;
-          background-color: lighten($color: $blue-primary, $amount: 10%);
+          background-color: lighten($color: $primary-dark, $amount: 10%);
         }
       }
     }
@@ -43,7 +41,7 @@
     justify-content: space-between;
     cursor: pointer;
     padding: 5px 20px;
-    background-color: $blue-primary;
+    background-color: $primary-dark;
     border-radius: inherit;
     height: 60px;
 
@@ -61,8 +59,8 @@
   }
 
   &-body {
-    border: 1px solid $blue-primary;
-    background-color: $bg-primary;
+    border: 1px solid $primary-dark;
+    background-color: $primary-light;
     height: 100%;
     transition: max-height 0.2s ease-in;
 
@@ -106,7 +104,6 @@
         padding: 10px;
         font-size: 18px;
         border: none;
-        border-radius: 20px;
         width: 85%;
         margin-right: 10px;
         color: $timestamp-gray;
@@ -115,13 +112,11 @@
 
       button {
         cursor: pointer;
-        background-color: $blue-primary;
+        background-color: $primary-dark;
         border: none;
-        border-radius: 100%;
         width: 40px;
         height: 40px;
         position: absolute;
-        bottom: 10px;
       }
     }
   }
@@ -157,7 +152,7 @@
   transition: all 0.3s ease-in;
 
   &:hover {
-    background: lighten($color: $blue-primary, $amount: 5%);
+    background: lighten($color: $primary-dark, $amount: 5%);
   }
 }
 

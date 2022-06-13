@@ -13,10 +13,9 @@ p.timestamp {
 
 .left-content {
   position: relative;
-  background-color: $gray-primary;
-  border-radius: 10px 10px 10px 0;
+  background-color: $highlight-primary;
   padding: 10px;
-  color: $chatbot-text;
+  color: $primary-light;
 
   img {
     width: 40px;
@@ -35,10 +34,9 @@ p.timestamp {
 
 .right-content {
   position: relative;
-  background-color: $blue-primary;
-  border-radius: 10px 10px 0 10px;
+  background-color: $primary-dark;
   padding: 10px;
-  color: $user-text;
+  color: $primary-light;
 
   p.timestamp {
     left: -55px;
@@ -49,13 +47,13 @@ p.timestamp {
 
 .selections {
   font-size: 18px;
-  color: $chatbot-text;
+  color: $primary-light;
   display: flex;
   margin-top: 10px;
   flex-wrap: wrap;
 
   p {
-    background-color: $gray-primary;
+    background-color: $highlight-primary;
     border-radius: 10px;
     width: fit-content;
     margin: 5px;
