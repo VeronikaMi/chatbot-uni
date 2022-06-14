@@ -4,10 +4,12 @@ import {
   Component,
   ElementRef,
   Input,
+  OnDestroy,
   OnInit,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
 import { ChatbotService } from '../chatbot.service';
 
 @Component({
@@ -15,8 +17,10 @@ import { ChatbotService } from '../chatbot.service';
   templateUrl: './chatbot.component.html',
   styleUrls: ['./chatbot.component.scss'],
 })
-export class ChatbotComponent implements OnInit, AfterViewChecked {
-  BACK_ENABLED: boolean = true;
+export class ChatbotComponent implements OnInit, AfterViewChecked, OnDestroy {
+  @Input() darkBackground: Subject<boolean> = new Subject<boolean>();
+  public changeColor: boolean = false;
+  private subscription: Subscription;
   private initialMessage = {
     text: 'გამარჯობა, მე ბანკის ციფრული ასისტენტი ვარ. ბანკის ოპერატორის მსგავსად, პასუხის გაცემა მეც მყისიერად შემიძლია. მთავარია, რაც გაინტერესებთ, მოკლედ აღწეროთ და ისე მომწეროთ',
     date: this.getTime(),
@@ -43,6 +47,10 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
     if (localStorage.getItem('history')) {
       this.messages = [...JSON.parse(localStorage.getItem('history'))];
     }
+
+    this.subscription = this.darkBackground.subscribe((value) => {
+      this.changeColor = value;
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -53,6 +61,12 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked(): void {
     this.scrollBottom();
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   onOptionSelect(id: number) {

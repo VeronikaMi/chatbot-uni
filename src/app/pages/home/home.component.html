@@ -1,1 +1,110 @@
-home
+<div class="hero-section">
+  <div class="left">
+    <div class="intro">
+      <h1>GreenBank-ing is modern banking</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Duis aute irure
+        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+        nulla pariatur.
+      </p>
+      <button type="button" routerLink="/about">მეტის ნახვა</button>
+    </div>
+    <div class="chatbot-info">
+      <img src="../../../assets/Chatbot.png" alt="chatbot" />
+      <p>
+        GreenBank is powed with chatbot that is always there to answer the most
+        frequintly asked question fast and effectively.
+      </p>
+    </div>
+  </div>
+  <div class="right">
+    <img src="../../../assets/Bank_01 1.png" alt="bank buildings" />
+  </div>
+</div>
+<div class="home-container">
+  <div class="possibilities">
+    <div class="find">
+      <h2>იპოვე რაც გინდა</h2>
+      <div class="img-item baking">
+        <div class="inner-text">
+          <h5>Baking for cake lovers</h5>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+            aliquam justo et nibh venenatis aliquet. Morbi mollis mollis
+            pellentesque
+          </p>
+        </div>
+      </div>
+      <div class="img-item cozy">
+        <div class="inner-text">
+          <h5>Cozy home for homebuddys</h5>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+            aliquam justo et nibh venenatis aliquet. Morbi mollis mollis
+            pellentesque
+          </p>
+        </div>
+      </div>
+      <div class="img-item nature">
+        <div class="inner-text">
+          <h5>Baking for cake lovers</h5>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+            aliquam justo et nibh venenatis aliquet. Morbi mollis mollis
+            pellentesque
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="offer">
+      <h2>რას გთავაზობ</h2>
+      <div class="services">
+        <trigger-list
+          [isVertical]="true"
+          [triggers]="homeTriggers"
+        ></trigger-list>
+      </div>
+    </div>
+  </div>
+  <div class="service cards">
+    <div class="info">
+      <h2>
+        Limited Time Offer! Praesent Sapien Massa Convallis a Pellentesque Nec.
+      </h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Duis aute irure
+        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+        nulla pariatur.
+      </p>
+      <button type="button">მეტის ნახვა</button>
+    </div>
+    <img src="../../../assets/cards.png" alt="cards" />
+  </div>
+  <div class="service app">
+    <div class="info">
+      <h2>
+        Limited Time Offer! Praesent Sapien Massa Convallis a Pellentesque Nec.
+      </h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Duis aute irure
+        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+        nulla pariatur.
+      </p>
+      <button type="button">მეტის ნახვა</button>
+    </div>
+    <img src="../../../assets/app.png" alt="app" />
+  </div>
+  <div class="reviews">
+    <h2>Our costumer’s review</h2>
+    <div class="review-list">
+      <trigger-list
+        [isVertical]="false"
+        [triggers]="reviews"
+        [isReview]="true"
+      ></trigger-list>
+    </div>
+  </div>
+</div>

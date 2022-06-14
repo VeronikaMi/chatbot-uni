@@ -27,7 +27,7 @@
   margin-bottom: 50px;
 
   img {
-    margin: 40px;
+    margin-left: -10px;
   }
 
   .text {
@@ -43,5 +43,12 @@
     background-color: $primary-dark;
     position: absolute;
     z-index: -9;
+  }
+}
+
+@media (max-width: 850px) {
+  .trigger.horizontal {
+    width: 70%;
+    margin: auto;
   }
 }

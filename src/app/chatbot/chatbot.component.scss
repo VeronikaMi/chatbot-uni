@@ -44,7 +44,6 @@
     background-color: $primary-dark;
     border-radius: inherit;
     height: 60px;
-
     h3 {
       color: #fff;
     }
@@ -163,4 +162,8 @@
   to {
     opacity: 1;
   }
+}
+
+.light {
+  background-color: $highlight-primary;
 }

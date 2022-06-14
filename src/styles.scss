@@ -45,3 +45,19 @@ nav {
     }
   }
 }
+
+button {
+  border: none;
+  background-color: $highlight-primary;
+  color: $primary-dark;
+  padding: 15px 25px;
+  font-size: 24px;
+  font-weight: bold;
+  transition: all 0.2s ease-in;
+  box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    cursor: pointer;
+    background-color: lighten($color: $highlight-primary, $amount: 3);
+  }
+}

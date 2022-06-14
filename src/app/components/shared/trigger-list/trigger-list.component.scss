@@ -4,3 +4,9 @@
   justify-content: space-around;
   gap: 40px;
 }
+
+@media (max-width: 850px) {
+  .horizontal {
+    flex-direction: column;
+  }
+}

@@ -1,4 +1,3 @@
-<!-- true => showChatbot -->
 <div class="chatbot" [ngClass]="{ show: showChatbot }">
   <div class="menu" *ngIf="showMenu" (click)="showMenu = false">
     <ul>
@@ -6,7 +5,11 @@
       <li class="menu-item" (click)="showChatbot = false">Close Chat</li>
     </ul>
   </div>
-  <div class="chatbot-header collapse" (click)="onChatbotClick($event.target)">
+  <div
+    class="chatbot-header collapse"
+    (click)="onChatbotClick($event.target)"
+    [ngClass]="{ light: changeColor }"
+  >
     <h3 class="collapse">Chatbot</h3>
     <div class="circle">
       <svg
