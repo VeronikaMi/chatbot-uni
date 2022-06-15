@@ -67,8 +67,8 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-evenly;
-
     .find {
+      width: 70%;
       .img-item {
         margin-bottom: 60px;
         color: $primary-light;

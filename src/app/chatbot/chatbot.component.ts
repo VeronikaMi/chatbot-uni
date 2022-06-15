@@ -22,14 +22,10 @@ export class ChatbotComponent implements OnInit, AfterViewChecked, OnDestroy {
   public changeColor: boolean = false;
   private subscription: Subscription;
   private initialMessage = {
-    text: 'გამარჯობა, მე ბანკის ციფრული ასისტენტი ვარ. ბანკის ოპერატორის მსგავსად, პასუხის გაცემა მეც მყისიერად შემიძლია. მთავარია, რაც გაინტერესებთ, მოკლედ აღწეროთ და ისე მომწეროთ',
+    text: '',
     date: this.getTime(),
     userOwner: false,
-    selectOptions: [
-      { id: 1, text: 'როგორ გადავრიცხო თანხა?' },
-      { id: 2, text: 'როგორ დავბლოკო ბარათი?' },
-      { id: 3, text: 'როგორ ავიღო სესხი?' },
-    ],
+    selectOptions: [],
   };
 
   @Input('messages') messages: any[] = [this.initialMessage];
@@ -51,6 +47,19 @@ export class ChatbotComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.subscription = this.darkBackground.subscribe((value) => {
       this.changeColor = value;
     });
+    this.http
+      .get('https://rulebased-chatbot.herokuapp.com/introMessage')
+      .subscribe((response: any) => {
+        this.initialMessage.text = response;
+      });
+    this.http
+      .get('https://rulebased-chatbot.herokuapp.com/selectedQuestions')
+      .subscribe((response: any) => {
+        this.initialMessage.selectOptions = response.map((el, index) => ({
+          id: index + 1,
+          text: el,
+        }));
+      });
   }
 
   ngOnChanges(changes: SimpleChanges) {

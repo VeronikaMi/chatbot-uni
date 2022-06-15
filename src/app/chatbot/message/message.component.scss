@@ -54,14 +54,13 @@ p.timestamp {
 
   p {
     background-color: $highlight-primary;
-    border-radius: 10px;
     width: fit-content;
     margin: 5px;
     padding: 10px;
 
     &:hover {
       cursor: pointer;
-      background-color: $gray-secondary;
+      background-color: lighten($color: $highlight-primary, $amount: 3);
     }
   }
 }

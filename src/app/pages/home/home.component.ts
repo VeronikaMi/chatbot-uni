@@ -11,50 +11,50 @@ export class HomePageComponent {
     {
       imgUrl: 'assets/home.png',
       heading: 'Home Loans',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.',
+      text: 'ბიზნესზე მორგებული მომსახურება,მეტი ურთიერთობა მომხმარებელთან',
     },
     {
       imgUrl: 'assets/online.png',
       heading: 'Online Banking',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.',
+      text: 'ბიზნესზე მორგებული მომსახურება,მეტი ურთიერთობა მომხმარებელთან',
     },
     {
       imgUrl: 'assets/credit.png',
       heading: 'Credit Cards',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.',
+      text: 'ბიზნესზე მორგებული მომსახურება,მეტი ურთიერთობა მომხმარებელთან',
     },
     {
       imgUrl: 'assets/business.png',
       heading: 'Business Banking',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.',
+      text: 'ბიზნესზე მორგებული მომსახურება,მეტი ურთიერთობა მომხმარებელთან',
     },
     {
       imgUrl: 'assets/travel.png',
       heading: 'Travel',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.',
+      text: 'ბიზნესზე მორგებული მომსახურება,მეტი ურთიერთობა მომხმარებელთან',
     },
     {
       imgUrl: 'assets/money.png',
       heading: 'Money Management',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.',
+      text: 'ბიზნესზე მორგებული მომსახურება,მეტი ურთიერთობა მომხმარებელთან',
     },
   ];
 
   public reviews: Trigger[] = [
     {
       imgUrl: 'assets/review1.png',
-      heading: 'Name Surname',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.',
+      heading: 'ეკა გაბელაია',
+      text: 'უკვე რამდენიმე წელია რაც ვსარგებლობ ამ ბანკის მომსახურებით და ძალიან კმაყოფილი ვარ. სერვისი ძალიან სწრაფია, რაშიც ეხმარებათ თავისი ჩათბოთი, ყოველთვის მპასუხობს ამომწურავად და გასაგებად',
     },
     {
       imgUrl: 'assets/review3.png',
-      heading: 'Name Surname',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.',
+      heading: 'ლიკა მელია',
+      text: 'ძალიან კმაყოფილი ვარ. სერვისი ძალიან სწრაფია, რაშიც ეხმარებათ თავისი ჩათბოთი, ყოველთვის მპასუხობს ამომწურავად და გასაგებად',
     },
     {
       imgUrl: 'assets/review4.png',
-      heading: 'Name Surname',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.',
+      heading: 'ნიკა კოსტავა',
+      text: 'უკვე რამდენიმე წელია რაც ვსარგებლობ ამ ბანკის მომსახურებით და ძალიან კმაყოფილი ვარ. სერვისი ძალიან სწრაფია, რაშიც ეხმარებათ თავისი ჩათბოთი, ყოველთვის მპასუხობს ამომწურავად და გასაგებად',
     },
   ];
 }

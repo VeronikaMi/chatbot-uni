@@ -111,11 +111,20 @@
 
       button {
         cursor: pointer;
-        background-color: $primary-dark;
+        // background-color: $blue-primary;
         border: none;
+        // border-radius: 100%;
         width: 40px;
         height: 40px;
         position: absolute;
+        bottom: 10px;
+        background-color: $primary-dark;
+
+        img {
+          display: block;
+          margin-left: -15px;
+          margin-top: -10px;
+        }
       }
     }
   }
