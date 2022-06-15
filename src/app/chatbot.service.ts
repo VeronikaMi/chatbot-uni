@@ -1,29 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import { Headers, Http, RequestOptions } from '@angular/common/http';
-// import { Observable } from 'rxjs/Observable';
-// import 'rxjs/add/operator/map';
-// import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs';
 
-// import { Message } from '../../models/message';
+const API: string = 'https://rulebased-chatbot.herokuapp.com';
 
 @Injectable()
 export class ChatbotService {
-  // private headers = new Headers({ 'Content-Type': 'application/json' });
-  // private options = new RequestOptions({ headers: this.headers });
-  // private idNgrok: string = '9d350345';
-  // private urlNgrok: string = 'http://' + this.idNgrok + '.ngrok.io';
-  // private urlSendMessage: string = this.idNgrok
-  //   ? this.urlNgrok + '/message/'
-  //   : 'localhost:8000/message/';
-  // constructor(private http: Http) {}
-  // sendMessage(message: any): Promise<any> {
-  //   return this.http
-  //     .post(this.urlSendMessage, message, this.options)
-  //     .toPromise();
-  //   // .then(this.extractData)
-  // }
-  // private extractData(res: Response) {
-  //   let body = res.json();
-  //   return body.data || {};
-  // }
+  constructor(private http: HttpClient) {}
+
+  public getInitMessage(): Observable<any> {
+    return this.http.get(`${API}/introMessage`);
+  }
+
+  public getSelections(): Observable<any> {
+    return this.http.get(`${API}/selectedQuestions`);
+  }
+
+  public getResponse(formData: FormData): Observable<any> {
+    return this.http.post(API, formData);
+  }
 }

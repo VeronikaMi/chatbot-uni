@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Message } from '../chatbot.component';
 
 @Component({
   selector: 'message',
@@ -6,7 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./message.component.scss'],
 })
 export class MessageComponent {
-  @Input() message: any;
+  @Input() message: Message;
   @Input('date') timestamp: string;
 
   @Output() selectedOption: EventEmitter<number> = new EventEmitter<number>();

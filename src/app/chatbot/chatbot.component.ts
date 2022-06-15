@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import {
   AfterViewChecked,
   Component,
@@ -6,7 +5,6 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
@@ -19,27 +17,26 @@ import { ChatbotService } from '../chatbot.service';
 })
 export class ChatbotComponent implements OnInit, AfterViewChecked, OnDestroy {
   @Input() darkBackground: Subject<boolean> = new Subject<boolean>();
+  @Input('messages') messages: Message[] = [];
   public changeColor: boolean = false;
   private subscription: Subscription;
-  private initialMessage = {
+  private initialMessage: Message = {
     text: '',
     date: this.getTime(),
     userOwner: false,
     selectOptions: [],
   };
 
-  @Input('messages') messages: any[] = [this.initialMessage];
-
-  textInput: string = '';
+  public textInput: string = '';
   public showChatbot: boolean = false;
   public showMenu: boolean = false;
   public timestamp: string;
 
   @ViewChild('messagesContainer') container: ElementRef;
 
-  constructor(private chatService: ChatbotService, private http: HttpClient) {}
+  constructor(private chatService: ChatbotService) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     if (localStorage.getItem('history')) {
       this.messages = [...JSON.parse(localStorage.getItem('history'))];
     }
@@ -47,38 +44,22 @@ export class ChatbotComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.subscription = this.darkBackground.subscribe((value) => {
       this.changeColor = value;
     });
-    this.http
-      .get('https://rulebased-chatbot.herokuapp.com/introMessage')
-      .subscribe((response: any) => {
-        this.initialMessage.text = response;
-      });
-    this.http
-      .get('https://rulebased-chatbot.herokuapp.com/selectedQuestions')
-      .subscribe((response: any) => {
-        this.initialMessage.selectOptions = response.map((el, index) => ({
-          id: index + 1,
-          text: el,
-        }));
-      });
+
+    this.getInitialMessage();
+    this.messages = [this.initialMessage];
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.messages) {
-      console.log(changes);
-    }
-  }
-
-  ngAfterViewChecked(): void {
+  public ngAfterViewChecked(): void {
     this.scrollBottom();
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }
 
-  onOptionSelect(id: number) {
+  public onOptionSelect(id: number): void {
     this.messages.push({
       text: this.messages[0].selectOptions.find((el) => el.id === id).text,
       date: this.getTime(),
@@ -96,7 +77,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked, OnDestroy {
     localStorage.setItem('history', JSON.stringify(this.messages));
   }
 
-  sendMessage() {
+  public sendMessage(): void {
     if (this.textInput.length > 0) {
       let newMessage = { text: this.textInput, date: '', userOwner: true };
       newMessage.date = this.getTime();
@@ -107,7 +88,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
   }
 
-  public onChatbotClick(element: any) {
+  public onChatbotClick(element: any): void {
     if (
       (element.classList.contains('collapse') &&
         !element.classList.contains('menu-item')) ||
@@ -125,31 +106,42 @@ export class ChatbotComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
   }
 
-  onDeleteHistory() {
+  public onDeleteHistory(): void {
     this.messages = [this.initialMessage];
     localStorage.clear();
   }
 
-  private getResponse(text: string) {
-    const formData = new FormData();
-    formData.append('question', text);
-
-    this.http
-      .post('https://rulebased-chatbot.herokuapp.com', formData)
-      .subscribe((response: any) => {
-        this.messages.push({
-          text: response.answer,
-          date: this.getTime(),
-          userOwner: false,
-        });
-        localStorage.setItem('history', JSON.stringify(this.messages));
-      });
-  }
-
-  onKey(event: any) {
+  public onKey(event: any): void {
     if (event.keyCode == 13) {
       this.sendMessage();
     }
+  }
+
+  private getResponse(text: string): void {
+    const formData = new FormData();
+    formData.append('question', text);
+
+    this.chatService.getResponse(formData).subscribe((response: any) => {
+      this.messages.push({
+        text: response.answer,
+        date: this.getTime(),
+        userOwner: false,
+      });
+      localStorage.setItem('history', JSON.stringify(this.messages));
+    });
+  }
+
+  private getInitialMessage(): void {
+    this.chatService.getInitMessage().subscribe((response: string) => {
+      this.initialMessage.text = response;
+    });
+
+    this.chatService.getSelections().subscribe((response: string[]) => {
+      this.initialMessage.selectOptions = response.map((el, index) => ({
+        id: index + 1,
+        text: el,
+      }));
+    });
   }
 
   private getTime(isMainTimestamp?: boolean): string {
@@ -172,4 +164,11 @@ export class ChatbotComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.container.nativeElement.scrollTop =
       this.container.nativeElement.scrollHeight;
   }
+}
+
+export class Message {
+  text: string;
+  date: string;
+  userOwner: boolean;
+  selectOptions?: { id: number; text: string }[];
 }
