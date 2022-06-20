@@ -52,3 +52,16 @@
     margin: auto;
   }
 }
+
+@media (max-width: 660px) {
+  .trigger.vertical {
+    img {
+      width: 100px;
+      height: 100px;
+    }
+    &:before {
+      height: 80px;
+      width: 80px;
+    }
+  }
+}
