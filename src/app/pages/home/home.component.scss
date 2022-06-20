@@ -190,6 +190,17 @@
 }
 
 @media (max-width: 600px) {
+  .hero-section {
+    .left {
+      .intro {
+        width: 100%;
+      }
+      .chatbot-info {
+        width: 100%;
+        display: block;
+      }
+    }
+  }
   .home-container {
     .possibilities {
       .find {
