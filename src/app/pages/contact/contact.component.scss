@@ -97,5 +97,20 @@
 @media (max-width: 660px) {
   .page-container {
     width: 100%;
+
+    .form-section {
+      .white-box {
+        width: 100%;
+        margin: 0;
+      }
+
+      .right {
+        form {
+          & > * {
+            width: 100%;
+          }
+        }
+      }
+    }
   }
 }
