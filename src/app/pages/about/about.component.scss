@@ -55,3 +55,16 @@
     }
   }
 }
+
+@media (max-width: 660px) {
+  .about-container {
+    width: 100%;
+    .hero-section {
+      .gray-section {
+        width: 100%;
+        padding: 50px 30px;
+        position: static;
+      }
+    }
+  }
+}

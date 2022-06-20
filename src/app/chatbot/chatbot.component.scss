@@ -176,3 +176,14 @@
 .light {
   background-color: $highlight-primary;
 }
+
+@media (max-width: 550px) {
+  .chatbot {
+    width: 100%;
+    right: 0;
+
+    &-header {
+      background-color: $highlight-primary;
+    }
+  }
+}
