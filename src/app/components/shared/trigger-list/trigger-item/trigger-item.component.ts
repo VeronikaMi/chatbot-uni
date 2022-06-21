@@ -9,10 +9,6 @@ export class TriggerItemComponent {
   @Input() isVertical: boolean;
   @Input() trigger: Trigger;
   @Input() isReview: boolean;
-
-  constructor() {
-    console.log(this.isVertical);
-  }
 }
 
 export class Trigger {

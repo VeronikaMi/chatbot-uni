@@ -83,7 +83,20 @@ export class ChatbotComponent implements OnInit, AfterViewChecked, OnDestroy {
       newMessage.date = this.getTime();
       this.messages.push(newMessage);
       localStorage.setItem('history', JSON.stringify(this.messages));
-      setTimeout(() => this.getResponse(newMessage.text), 1000);
+
+      if (new RegExp('[ა-ჰ]').test(this.textInput)) {
+        setTimeout(() => this.getResponse(newMessage.text), 1000);
+      } else {
+        setTimeout(() => {
+          this.messages.push({
+            text: 'გთხოვთ გამოიყენოთ ქართული ენა',
+            date: this.getTime(),
+            userOwner: false,
+          });
+          localStorage.setItem('history', JSON.stringify(this.messages));
+        }, 1000);
+      }
+
       this.textInput = '';
     }
   }

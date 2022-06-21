@@ -10,32 +10,32 @@ export class HomePageComponent {
   public homeTriggers: Trigger[] = [
     {
       imgUrl: 'assets/home.png',
-      heading: 'Home Loans',
+      heading: 'იპოთეკა',
       text: 'ბიზნესზე მორგებული მომსახურება,მეტი ურთიერთობა მომხმარებელთან',
     },
     {
       imgUrl: 'assets/online.png',
-      heading: 'Online Banking',
+      heading: 'ონლაინ ბანკი',
       text: 'ბიზნესზე მორგებული მომსახურება,მეტი ურთიერთობა მომხმარებელთან',
     },
     {
       imgUrl: 'assets/credit.png',
-      heading: 'Credit Cards',
+      heading: 'Mastercard ბარათები',
       text: 'ბიზნესზე მორგებული მომსახურება,მეტი ურთიერთობა მომხმარებელთან',
     },
     {
       imgUrl: 'assets/business.png',
-      heading: 'Business Banking',
+      heading: 'ბანკი ბიზნესისთვის',
       text: 'ბიზნესზე მორგებული მომსახურება,მეტი ურთიერთობა მომხმარებელთან',
     },
     {
       imgUrl: 'assets/travel.png',
-      heading: 'Travel',
+      heading: 'მოგზაურობა',
       text: 'ბიზნესზე მორგებული მომსახურება,მეტი ურთიერთობა მომხმარებელთან',
     },
     {
       imgUrl: 'assets/money.png',
-      heading: 'Money Management',
+      heading: 'ფულის მართვა',
       text: 'ბიზნესზე მორგებული მომსახურება,მეტი ურთიერთობა მომხმარებელთან',
     },
   ];

@@ -10,8 +10,4 @@ export class TriggerListComponent {
   @Input() isVertical: boolean;
   @Input() isReview: boolean;
   @Input() triggers: Trigger[];
-
-  constructor() {
-    console.log(this.isVertical);
-  }
 }
