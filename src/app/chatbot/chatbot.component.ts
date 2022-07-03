@@ -31,12 +31,16 @@ export class ChatbotComponent implements OnInit, AfterViewChecked, OnDestroy {
   public showChatbot: boolean = false;
   public showMenu: boolean = false;
   public timestamp: string;
+  public showPopupMsg: boolean = true;
 
   @ViewChild('messagesContainer') container: ElementRef;
 
   constructor(private chatService: ChatbotService) {}
 
   public ngOnInit(): void {
+    this.getInitialMessage();
+    this.messages = [this.initialMessage];
+
     if (localStorage.getItem('history')) {
       this.messages = [...JSON.parse(localStorage.getItem('history'))];
     }
@@ -44,9 +48,6 @@ export class ChatbotComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.subscription = this.darkBackground.subscribe((value) => {
       this.changeColor = value;
     });
-
-    this.getInitialMessage();
-    this.messages = [this.initialMessage];
   }
 
   public ngAfterViewChecked(): void {
@@ -116,6 +117,10 @@ export class ChatbotComponent implements OnInit, AfterViewChecked, OnDestroy {
       }
     } else {
       this.showMenu = !this.showMenu;
+    }
+
+    if (this.showPopupMsg) {
+      this.showPopupMsg = false;
     }
   }
 
