@@ -29,7 +29,7 @@ import { TriggerListComponent } from './components/shared/trigger-list/trigger-l
     ContactPageComponent,
     AboutPageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule.withServerTransition({ appId: 'serverApp' }), AppRoutingModule, FormsModule, HttpClientModule],
   providers: [ChatbotService],
   bootstrap: [AppComponent],
 })
