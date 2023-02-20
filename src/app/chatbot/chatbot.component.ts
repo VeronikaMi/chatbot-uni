@@ -139,27 +139,30 @@ export class ChatbotComponent implements OnInit, AfterViewChecked, OnDestroy {
     const formData = new FormData();
     formData.append('question', text);
 
-    this.chatService.getResponse(formData).subscribe((response: any) => {
-      this.messages.push({
-        text: response.answer,
-        date: this.getTime(),
-        userOwner: false,
-      });
-      localStorage.setItem('history', JSON.stringify(this.messages));
-    });
+    // this.chatService.getResponse(formData).subscribe((response: any) => {
+    //   this.messages.push({
+    //     text: response.answer,
+    //     date: this.getTime(),
+    //     userOwner: false,
+    //   });
+    //   localStorage.setItem('history', JSON.stringify(this.messages));
+    // });
   }
 
   private getInitialMessage(): void {
-    this.chatService.getInitMessage().subscribe((response: string) => {
-      this.initialMessage.text = response;
-    });
+    // this.chatService.getInitMessage().subscribe((response: string) => {
+    // this.initialMessage.text = response;
+    // });
 
-    this.chatService.getSelections().subscribe((response: string[]) => {
-      this.initialMessage.selectOptions = response.map((el, index) => ({
-        id: index + 1,
-        text: el,
-      }));
-    });
+    this.initialMessage.text =
+      'მოგესალმებით, ამ მომენტისთვის ჩათის სერვისი არ მუშაობს.';
+
+    // this.chatService.getSelections().subscribe((response: string[]) => {
+    //   this.initialMessage.selectOptions = response.map((el, index) => ({
+    //     id: index + 1,
+    //     text: el,
+    //   }));
+    // });
   }
 
   private getTime(isMainTimestamp?: boolean): string {
